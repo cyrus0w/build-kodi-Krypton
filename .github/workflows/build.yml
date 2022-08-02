@@ -40,12 +40,15 @@ jobs:
         ref: 17.6-Krypton
         path: kodi-android
     - name: Build kodi dependent
+      continue-on-error: true
       run: |
         cd kodi-android/tools/depends
         ./bootstrap
         sudo ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
         sudo make -j$(getconf _NPROCESSORS_ONLN)
         sudo make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
     - name: Build kodi
       continue-on-error: true
       run: |
