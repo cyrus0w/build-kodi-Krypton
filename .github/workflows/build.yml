@@ -47,6 +47,7 @@ jobs:
         sudo make -j$(getconf _NPROCESSORS_ONLN)
         sudo make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
     - name: Build kodi
+      continue-on-error: true
       run: |
         cd ../../kodi-android
         sudo make -C tools/depends/target/xbmc
@@ -55,7 +56,6 @@ jobs:
         sudo mkdir -p /opt/images/
         sudo mv -f *.apk /opt/packages/
     - name: Setup Debug Session
-      continue-on-error: true
       uses: csexton/debugger-action@master
     - name : Upload packages
       uses: actions/upload-artifact@master
