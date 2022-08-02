@@ -54,12 +54,12 @@ jobs:
         sudo make apk
         sudo mkdir -p /opt/images/
         sudo mv -f *.apk /opt/packages/
+    - name: Setup Debug Session
+      continue-on-error: true
+      uses: csexton/debugger-action@master
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: Padavan-packages
         path: /opt/packages
-    - name: Setup Debug Session
-      continue-on-error: true
-      uses: csexton/debugger-action@master
