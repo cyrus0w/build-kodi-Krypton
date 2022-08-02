@@ -32,8 +32,6 @@ jobs:
         cd /opt/android-ndk-r12b/build/tools
         sudo ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
         sudo keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
-        cd ~
-        pwd
     - name: Checkout xbmc17.6 code
       uses: actions/checkout@v3
       with:
@@ -42,17 +40,17 @@ jobs:
         path: kodi-android
     - name: Build kodi dependent
       run: |
-        cd $HOME/kodi-android/tools/depends
+        cd kodi-android/tools/depends
         ./bootstrap
         sudo ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
-        make -j$(getconf _NPROCESSORS_ONLN)
-        make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
+        sudo make -j$(getconf _NPROCESSORS_ONLN)
+        sudo make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
     - name: Build kodi
       run: |
-        cd $HOME/kodi-android
-        make -C tools/depends/target/xbmc
-        make
-        make apk
+        cd ../../kodi-android
+        sudo make -C tools/depends/target/xbmc
+        sudo make
+        sudo make apk
         sudo mkdir -p /opt/images/
         sudo mv -f *.apk /opt/packages/
     - name : Upload packages
