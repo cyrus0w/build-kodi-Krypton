@@ -1,1 +1,1 @@
-# build-kodi-17.6
+# build-kodi-Krypton
