@@ -11,7 +11,7 @@ jobs:
     - name: System basic environment settings
       run: |
         sudo apt-get install build-essential default-jdk git curl autoconf unzip zip zlib1g-dev gawk gperf cmake -y
-        sudo apt-get install lib32stdc++6 lib32z1 lib32z1-dev apt-get -y
+        sudo apt-get install lib32stdc++6 lib32z1 lib32z1-dev -y
         sudo apt-get install libssl-dev libcurl4-openssl-dev qt4-qmake libvorbis-dev libncurses5-dev libsqlite3-dev libgdbm-dev libreadline-dev libbz2-dev tk8.6-dev libdb-dev python-dev libncurses-dev tcl8.6-dev sqlite3 -y
     - name: Setup Java JDK
       uses: actions/setup-java@v3.4.1
