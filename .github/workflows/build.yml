@@ -45,7 +45,7 @@ jobs:
         cd kodi-android/tools/depends
         ./bootstrap
         sudo ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
-        sudo make -j$(getconf _NPROCESSORS_ONLN)
+        sudo make -j$(getconf _NPROCESSORS_ONLN) > build.log 2>&1
         sudo make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
     - name: Setup Debug Session
       uses: csexton/debugger-action@master
