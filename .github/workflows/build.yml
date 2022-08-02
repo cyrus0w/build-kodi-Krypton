@@ -31,7 +31,7 @@ jobs:
         echo yes|sudo ./android update sdk --all -u -t build-tools-20.0.0
         cd /opt/android-ndk-r12b/build/tools
         sudo ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
-        keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
+        sudo keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
         cd ~
         pwd
     - name: Checkout xbmc17.6 code
