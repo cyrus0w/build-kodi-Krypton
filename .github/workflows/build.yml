@@ -51,9 +51,9 @@ jobs:
         make apk
         sudo mkdir -p /opt/images/
         sudo mv -f *.apk /opt/packages/
-      - name : Upload packages
-        uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: Padavan-packages
-          path: /opt/packages
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/packages
