@@ -8,8 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
     - name: System basic environment settings
       run: |
         sudo touch /tmp/keepalive
@@ -62,3 +60,5 @@ jobs:
       with:
         name: Padavan-packages
         path: /opt/packages
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
