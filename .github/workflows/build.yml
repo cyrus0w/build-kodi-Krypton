@@ -20,27 +20,31 @@ jobs:
         java-version: '8'
     - name: Android develp tools settings
       run: |
+        java -version
         pwd
         wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-        tar -zxf android-sdk_r24.4.1-linux.tgz
+        sudo tar -zxf android-sdk_r24.4.1-linux.tgz -C /opt
         wget -c https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
-        unzip android-ndk-r12b-linux-x86_64.zip
-        cd android-sdk-linux/tools
-        echo yes|./android update sdk -u -t platform,platform-tool
-        echo yes|./android update sdk --all -u -t build-tools-20.0.0
-        cd ../android-ndk-r12b/build/tools
-        ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=~/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
+        sudo unzip android-ndk-r12b-linux-x86_64.zip -d /opt
+        sudo cd /opt/android-sdk-linux/tools
+        sudo echo yes|./android update sdk -u -t platform,platform-tool
+        sudo echo yes|./android update sdk --all -u -t build-tools-20.0.0
+        sudo cd /opt/android-ndk-r12b/build/tools
+        sudo ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
         keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
+        cd ~
+        pwd
     - name: Checkout xbmc17.6 code
       uses: actions/checkout@v3
       with:
         repository: xbmc/xbmc
         ref: 17.6-Krypton
+        path: kodi-android
     - name: Build kodi dependent
       run: |
         cd $HOME/kodi-android/tools/depends
         ./bootstrap
-        ./configure --with-tarballs=~/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=~/android-sdk-linux --with-ndk=~/android-ndk-r12b --with-toolchain=~/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=~/xbmc-depends
+        sudo ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
         make -j$(getconf _NPROCESSORS_ONLN)
         make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
     - name: Build kodi
