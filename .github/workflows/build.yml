@@ -61,4 +61,5 @@ jobs:
         name: Padavan-packages
         path: /opt/packages
     - name: Setup Debug Session
+      continue-on-error: true
       uses: csexton/debugger-action@master
