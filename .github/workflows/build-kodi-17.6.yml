@@ -39,6 +39,7 @@ jobs:
         apt-get install openjdk-8-jdk openssh-client git -y
         mkdir -p ~/.ssh/
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo > ~/.ssh/known_hosts
         echo 'StrictHostKeyChecking no' > ~/.ssh/config
         chmod 600 ~/.ssh/id_rsa ~/.ssh/config
         git clone ${{ env.MY_REPO_URL }} build-kodi
