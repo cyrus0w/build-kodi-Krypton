@@ -32,10 +32,7 @@ jobs:
         keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
     - name: Checkout xbmc code
       run: |
-        pwd
-        git clone https://github.com/xbmc/xbmc
-        ls
-        pwd
+        git clone -b ${{ env.KODI_VERSION }}-Krypton https://github.com/xbmc/xbmc kodi-android
     - name: Build kodi dependent
       continue-on-error: true
       run: |
