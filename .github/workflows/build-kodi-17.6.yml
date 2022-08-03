@@ -20,7 +20,7 @@ jobs:
         apt-get update
         apt-get install build-essential default-jdk git curl wget autoconf unzip zip zlib1g-dev gawk gperf cmake openjdk-8-jdk openssh-client -y
         apt-get install lib32stdc++6 lib32z1 lib32z1-dev -y
-        apt-get install libssl-dev libcurl4-openssl-dev qt4-qmake libvorbis-dev libncurses5-dev \
+        apt-get install libcrossguid-dev libssl-dev libcurl4-openssl-dev qt4-qmake libvorbis-dev libncurses5-dev \
         libsqlite3-dev libgdbm-dev libreadline-dev libbz2-dev tk8.6-dev libdb-dev python-dev libncurses-dev tcl8.6-dev sqlite3 -y
     - name: Android compilation environment settings
       run: |
