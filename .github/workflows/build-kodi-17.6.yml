@@ -34,6 +34,8 @@ jobs:
       run: |
         cd ~
         git clone https://github.com/xbmc/xbmc
+        ls
+        pwd
     - name: Build kodi dependent
       continue-on-error: true
       run: |
