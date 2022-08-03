@@ -34,6 +34,10 @@ jobs:
  #       ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
  #       keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
     - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+    - name: Checkout
       run: |
         apt-get update
         apt-get install openjdk-8-jdk openssh-client git -y
