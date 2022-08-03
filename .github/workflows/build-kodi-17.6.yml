@@ -36,7 +36,7 @@ jobs:
     - name: Checkout
       run: |
         apt-get update
-        apt-get install openjdk-8-jdk openssh-client -y
+        apt-get install openjdk-8-jdk openssh-client git -y
         mkdir -p ~/.ssh/
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa 
         chmod 600 ~/.ssh/id_rsa
