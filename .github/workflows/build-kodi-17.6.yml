@@ -5,7 +5,10 @@ on:
     types: [started]
     
 env:
-  KODI_VERSION: 17.6
+  REPO_URL: https://github.com/xbmc/xbmc.git
+  REPO_BRANCH: 17.6-Krypton
+  MY_REPO_URL: https://github.com/cyrus0w/build-kodi-Krypton.git
+  DIY_BASH: diy.sh
 
 jobs:
   container-build:
@@ -30,25 +33,33 @@ jobs:
         cd /opt/android-ndk-r12b/build/tools
         ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
         keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
+    - name: Checkout
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa 
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git clone ${{ MY_REPO_URL }} build-kodi
     - name: Checkout xbmc code
       run: |
-        git clone -b ${{ env.KODI_VERSION }}-Krypton https://github.com/xbmc/xbmc kodi-android
+        git clone -b ${{ env.REPO_BRANCH }} ${{ env.REPO_URL }} kodi-android
+    - name: Custom settings
+      run: |
+        [ -f build-kodi/diy-kodi-krypton/${{ env.DIY_BASH }} ] && chmod +x build-kodi/diy-kodi-krypton/${{ env.DIY_BASH }}; \
+        $GITHUB_WORKSPACE/build-kodi/diy-kodi-krypton/${{ env.DIY_BASH }}
     - name: Build kodi dependent
-      continue-on-error: true
       run: |
         ls
         pwd
-        cd kodi-android/tools/depends
+        cd $GITHUB_WORKSPACE/kodi-android/tools/depends
         ./bootstrap
         ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
         make -j$(getconf _NPROCESSORS_ONLN) | tee build.log 2>&1
         make -C target/binary-addons ADDONS="pvr.iptvsimple inputstream.rtmp audioencoder.flac audioencoder.wav"
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
     - name: Build kodi
-      continue-on-error: true
       run: |
-        cd ../../kodi-android
+        pwd
+        cd $GITHUB_WORKSPACE/kodi-android
         make -C tools/depends/target/xbmc
         sudo make
         make apk
