@@ -19,25 +19,25 @@ jobs:
       run: |
         apt-get update
         apt-get install build-essential default-jdk git curl wget autoconf unzip zip zlib1g-dev gawk gperf cmake openjdk-8-jdk openssh-client -y
-        apt-get install lib32stdc++6 lib32z1 lib32z1-dev -y
-        apt-get install libssl-dev libcurl4-openssl-dev qt4-qmake libvorbis-dev libncurses5-dev \
-        libsqlite3-dev libgdbm-dev libreadline-dev libbz2-dev tk8.6-dev libdb-dev python-dev libncurses-dev tcl8.6-dev sqlite3 -y
-    - name: Android compilation environment settings
-      run: |
-        wget -c https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-        tar -zxf android-sdk_r24.4.1-linux.tgz -C /opt
-        wget -c https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
-        unzip android-ndk-r12b-linux-x86_64.zip -d /opt
-        cd /opt/android-sdk-linux/tools
-        echo yes|./android update sdk -u -t platform,platform-tool
-        echo yes|./android update sdk --all -u -t build-tools-20.0.0
-        cd /opt/android-ndk-r12b/build/tools
-        ./make-standalone-toolchain.sh --ndk-dir=../../ \
-        --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 \
-        --platform=android-21 --toolchain=arm-linux-androideabi-4.9
-        keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey \
-        -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
-        -keyalg RSA -keysize 2048 -validity 10000
+##        apt-get install lib32stdc++6 lib32z1 lib32z1-dev -y
+##        apt-get install libssl-dev libcurl4-openssl-dev qt4-qmake libvorbis-dev libncurses5-dev \
+##        libsqlite3-dev libgdbm-dev libreadline-dev libbz2-dev tk8.6-dev libdb-dev python-dev libncurses-dev tcl8.6-dev sqlite3 -y
+##    - name: Android compilation environment settings
+##      run: |
+##        wget -c https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+##        tar -zxf android-sdk_r24.4.1-linux.tgz -C /opt
+##        wget -c https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
+##        unzip android-ndk-r12b-linux-x86_64.zip -d /opt
+##        cd /opt/android-sdk-linux/tools
+##        echo yes|./android update sdk -u -t platform,platform-tool
+##        echo yes|./android update sdk --all -u -t build-tools-20.0.0
+##        cd /opt/android-ndk-r12b/build/tools
+##        ./make-standalone-toolchain.sh --ndk-dir=../../ \
+##        --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 \
+##        --platform=android-21 --toolchain=arm-linux-androideabi-4.9
+##        keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey \
+##        -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android \
+##        -keyalg RSA -keysize 2048 -validity 10000
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -65,11 +65,11 @@ jobs:
       continue-on-error: true
       run: |
         cd kodi-android/tools/depends
-        ./bootstrap
-        ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi \
-        --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b \
-        --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
-        make -j$(getconf _NPROCESSORS_ONLN) | tee build.log 2>&1
+##        ./bootstrap
+##        ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi \
+##        --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b \
+##        --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
+##        make -j$(getconf _NPROCESSORS_ONLN) | tee build.log 2>&1
         [ -f ../../../${{ env.DIY_PART2_BASH }} ] && chmod +x ../../../${{ env.DIY_PART2_BASH }}; \
         ../../../${{ env.DIY_PART2_BASH }}
 #    - name: Setup Debug Session
