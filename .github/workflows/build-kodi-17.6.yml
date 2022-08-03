@@ -55,7 +55,7 @@ jobs:
     - name: Custom settings
       run: |
         [ -f diy-kodi-krypton/${{ env.DIY_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_BASH }}; \
-        cd /diy-kodi-krypton;./${{ env.DIY_BASH }}
+        cd diy-kodi-krypton;./${{ env.DIY_BASH }}
     - name: Build kodi dependent
       run: |
         ls
