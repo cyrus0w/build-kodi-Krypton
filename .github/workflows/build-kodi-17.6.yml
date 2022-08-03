@@ -7,7 +7,6 @@ on:
 env:
   REPO_URL: https://github.com/xbmc/xbmc.git
   REPO_BRANCH: 17.6-Krypton
-  MY_REPO_URL: git@github.com:cyrus0w/build-kodi-Krypton.git
   DIY_PART1_BASH: diy_part1.sh
   DIY_PART2_BASH: diy_part2.sh
 
@@ -25,7 +24,7 @@ jobs:
         libsqlite3-dev libgdbm-dev libreadline-dev libbz2-dev tk8.6-dev libdb-dev python-dev libncurses-dev tcl8.6-dev sqlite3 -y
     - name: Android compilation environment settings
       run: |
-        wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+        wget -c https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
         tar -zxf android-sdk_r24.4.1-linux.tgz -C /opt
         wget -c https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
         unzip android-ndk-r12b-linux-x86_64.zip -d /opt
@@ -63,6 +62,7 @@ jobs:
         [ -f diy-kodi-krypton/${{ env.DIY_PART1_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_PART1_BASH }}; \
         cd diy-kodi-krypton;./${{ env.DIY_PART1_BASH }}
     - name: Build kodi dependent and diy part2
+      continue-on-error: true
       run: |
         cd kodi-android/tools/depends
         ./bootstrap
@@ -72,6 +72,8 @@ jobs:
         make -j$(getconf _NPROCESSORS_ONLN) | tee build.log 2>&1
         [ -f ../../../${{ env.DIY_PART2_BASH }} ] && chmod +x ../../../${{ env.DIY_PART2_BASH }}; \
         ../../../${{ env.DIY_PART2_BASH }}
+#    - name: Setup Debug Session
+#      uses: csexton/debugger-action@master
     - name: Build kodi
       run: |
         pwd
