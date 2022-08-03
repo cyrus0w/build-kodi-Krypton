@@ -35,6 +35,7 @@ jobs:
  #       keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
     - name: Checkout
       run: |
+        apt-get update
         apt-get install openjdk-8-jdk openssh-client -y
         mkdir -p ~/.ssh/
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa 
