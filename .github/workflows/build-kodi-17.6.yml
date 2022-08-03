@@ -40,8 +40,7 @@ jobs:
         mkdir -p ~/.ssh/
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa 
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        cat ~/.ssh/known_hosts
+        echo 'StrictHostKeyChecking no' > ~/.ssh/config
         git clone ${{ env.MY_REPO_URL }} build-kodi
     - name: Checkout xbmc code
       run: |
