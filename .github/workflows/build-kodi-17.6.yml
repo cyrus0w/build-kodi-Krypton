@@ -39,7 +39,7 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa 
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git clone ${{ MY_REPO_URL }} build-kodi
+        git clone ${{ env.MY_REPO_URL }} build-kodi
     - name: Checkout xbmc code
       run: |
         git clone -b ${{ env.REPO_BRANCH }} ${{ env.REPO_URL }} kodi-android
