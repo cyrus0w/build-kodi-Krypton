@@ -34,7 +34,6 @@ jobs:
       run: |
         cd ~
         git clone https://github.com/xbmc/xbmc
-        git clone -b ${{ env.KODI_VERSION }}-Krypton https://github.com/xbmc/xbmc kodi-android
     - name: Build kodi dependent
       continue-on-error: true
       run: |
