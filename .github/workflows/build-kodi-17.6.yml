@@ -37,6 +37,8 @@ jobs:
     - name: Build kodi dependent
       continue-on-error: true
       run: |
+        ls
+        pwd
         cd kodi-android/tools/depends
         ./bootstrap
         sudo ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b --with-toolchain=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/opt/xbmc-depends
