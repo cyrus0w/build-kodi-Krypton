@@ -65,8 +65,8 @@ jobs:
       continue-on-error: true
       run: |
         cd kodi-android/tools/depends
-        [ -f ../../../${{ env.DIY_PART2_BASH }} ] && chmod +x ../../../${{ env.DIY_PART2_BASH }}; \
-        ../../../${{ env.DIY_PART2_BASH }}
+        [ -f ../../../diy-kodi-krypton/${{ env.DIY_PART2_BASH }} ] && chmod +x ../../../diy-kodi-krypton/${{ env.DIY_PART2_BASH }}; \
+        ../../../diy-kodi-krypton/${{ env.DIY_PART2_BASH }}
 ##        ./bootstrap
 ##        ./configure --with-tarballs=/opt/xbmc-tarballs --host=arm-linux-androideabi \
 ##        --with-sdk-path=/opt/android-sdk-linux --with-ndk=/opt/android-ndk-r12b \
