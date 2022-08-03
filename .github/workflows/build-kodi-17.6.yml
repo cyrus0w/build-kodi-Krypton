@@ -30,12 +30,10 @@ jobs:
         cd /opt/android-ndk-r12b/build/tools
         ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/opt/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
         keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
-    - name: Checkout xbmc${KODI_VERSION} code
-      uses: actions/checkout@v3
-      with:
-        repository: xbmc/xbmc
-        ref: ${KODI_VERSION}-Krypton
-        path: kodi-android
+    - name: Checkout xbmc code
+      run: |
+        cd ~
+        git clone -b ${KODI_VERSION}-Krypton https://github.com/xbmc/xbmc kodi-android
     - name: Build kodi dependent
       continue-on-error: true
       run: |
