@@ -49,6 +49,7 @@ jobs:
 #       git clone ${{ env.MY_REPO_URL }} build-kodi
     - name: Checkout xbmc code
       run: |
+        pwd
         ls
         git clone -b ${{ env.REPO_BRANCH }} ${{ env.REPO_URL }} kodi-android
     - name: Custom settings
