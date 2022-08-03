@@ -7,7 +7,7 @@ on:
 env:
   REPO_URL: https://github.com/xbmc/xbmc.git
   REPO_BRANCH: 17.6-Krypton
-  MY_REPO_URL: https://github.com/cyrus0w/build-kodi-Krypton.git
+  MY_REPO_URL: git@github.com:cyrus0w/build-kodi-Krypton.git
   DIY_BASH: diy.sh
 
 jobs:
