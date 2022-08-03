@@ -80,12 +80,12 @@ jobs:
 ##        make -C tools/depends/target/xbmc
 ##        make
 ##        make apk
-##        mkdir -p /opt/images/
+##        mkdir -p /opt/packages/
 ##        mv -f *.apk /opt/packages/
     - name: Build kodi
       run: |
-        mkdir -p /opt/images/
-        touch /opt/images/haha.txt
+        mkdir -p /opt/packages/
+        touch /opt/packages/haha.txt
 #    - name: Setup Debug Session
 #      uses: csexton/debugger-action@master
     - name : Upload packages
