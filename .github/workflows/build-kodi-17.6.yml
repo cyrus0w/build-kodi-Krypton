@@ -33,10 +33,11 @@ jobs:
     - name: Checkout xbmc code
       run: |
         cd ~
-        git clone -b ${KODI_VERSION}-Krypton https://github.com/xbmc/xbmc kodi-android
+        git clone -b env.KODI_VERSION-Krypton https://github.com/xbmc/xbmc kodi-android
     - name: Build kodi dependent
       continue-on-error: true
       run: |
+        cat /etc/os-release
         ls
         pwd
         cd kodi-android/tools/depends
