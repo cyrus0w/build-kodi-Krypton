@@ -59,8 +59,8 @@ jobs:
       run: |
         [ -f diy-kodi-krypton/${{ env.DIY_PART1_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_PART1_BASH }}; \
         cd diy-kodi-krypton;./${{ env.DIY_PART1_BASH }}
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
+        ls kodi-android/addons
+        pwd
     - name: Build kodi dependent and diy part2
 #      continue-on-error: true
       run: |
