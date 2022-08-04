@@ -57,8 +57,8 @@ jobs:
         git clone -b ${{ env.REPO_BRANCH }} ${{ env.REPO_URL }} kodi-android
     - name: Diy part1
       run: |
-        [ -f diy-kodi-krypton/${{ env.DIY_PART1_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_PART1_BASH }}; \
-        cd diy-kodi-krypton;./${{ env.DIY_PART1_BASH }}
+        [ -f diy-kodi-krypton/${{ env.DIY_PART1_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_PART1_BASH }};\
+        ./${{ env.DIY_PART1_BASH }}
         pwd
         ls
         ls kodi-android
