@@ -59,8 +59,9 @@ jobs:
       run: |
         [ -f diy-kodi-krypton/${{ env.DIY_PART1_BASH }} ] && chmod +x diy-kodi-krypton/${{ env.DIY_PART1_BASH }}; \
         cd diy-kodi-krypton;./${{ env.DIY_PART1_BASH }}
-        ls kodi-android/addons
         pwd
+        ls
+        ls kodi-android/addons
     - name: Build kodi dependent and diy part2
 #      continue-on-error: true
       run: |
